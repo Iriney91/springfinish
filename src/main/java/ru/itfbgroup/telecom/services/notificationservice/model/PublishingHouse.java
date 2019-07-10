@@ -1,13 +1,16 @@
 package ru.itfbgroup.telecom.services.notificationservice.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.Table;
+import lombok.Data;
 
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+@Data
 @Entity
+@SequenceGenerator(name = "MY_SEQ", sequenceName = "publishingHouse_SEQ")
 @Table(indexes = {@Index(name = "publishingHouse_INN_idx", columnList = "INN", unique = true)})
-public class PublishingHouse {
+public class PublishingHouse extends IDIdentity{
 
     @Column(nullable = false)
     private String name;
@@ -17,4 +20,7 @@ public class PublishingHouse {
 
     @Column(nullable = false)
     private String address;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "publishingHouse")
+    private Set <Book> books = new HashSet<>();
 }

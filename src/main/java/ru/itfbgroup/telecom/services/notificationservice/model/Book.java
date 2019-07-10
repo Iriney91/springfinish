@@ -1,16 +1,16 @@
 package ru.itfbgroup.telecom.services.notificationservice.model;
 
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
+@Data
 @Entity
+@SequenceGenerator(name = "MY_SEQ", sequenceName = "book_SEQ")
 @Table(indexes = {@Index(name = "book_iccid_idx", columnList = "iccid", unique = true), @Index(name = "book_name_idx", columnList = "name", unique = false)})
-public class Book {
+public class Book extends IDIdentity {
 
     @Column(updatable = false, nullable = false)
     @CreationTimestamp
@@ -24,4 +24,14 @@ public class Book {
 
     @Column(nullable = false)
     private Integer year;
+
+    @JoinColumn(name = "PUB_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private PublishingHouse publishingHouse;
+
+    @Column (name = "PUB_ID", insertable = false, updatable = false)
+    private long publishingHouse_ID;
+
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+    private BookBinary bookBinary;
 }
