@@ -1,12 +1,16 @@
 package ru.itfbgroup.telecom.services.notificationservice.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
+@EqualsAndHashCode(callSuper = true, exclude = {"publishingHouse", "bookBinary", "authors"})
 @Entity
 @SequenceGenerator(name = "MY_SEQ", sequenceName = "book_SEQ")
 @Table(indexes = {@Index(name = "book_iccid_idx", columnList = "iccid", unique = true), @Index(name = "book_name_idx", columnList = "name", unique = false)})
@@ -34,4 +38,7 @@ public class Book extends IDIdentity {
 
     @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     private BookBinary bookBinary;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "books")
+    private Set <Author> authors = new HashSet<>();
 }

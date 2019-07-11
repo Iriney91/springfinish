@@ -12,5 +12,5 @@ public class IDIdentity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MY_SEQ")
-    private long id;
+    private long ID;
 }
