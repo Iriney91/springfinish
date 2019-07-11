@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class Client extends IDIdentity{
 
     @Column(nullable = false)
-    private String fullname;
+    private String fullName;
 
     @Column(nullable = false)
     private String login;

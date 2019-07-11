@@ -15,7 +15,7 @@ import java.util.Set;
 public class Author extends IDIdentity{
 
     @Column(nullable = false)
-    private String fullname;
+    private String fullName;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "Authors_Books",

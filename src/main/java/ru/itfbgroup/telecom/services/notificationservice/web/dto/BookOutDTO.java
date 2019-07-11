@@ -1,15 +1,16 @@
 package ru.itfbgroup.telecom.services.notificationservice.web.dto;
 
 import lombok.Data;
-
 import java.util.List;
 
 @Data
-public class BookInDTO {
+public class BookOutDTO {
 
+    private Long Id;
+    private Long createDate;
     private String name;
     private String iccid;
     private Integer year;
-    private List <Long> authors;
-    private Long publishingHouseId;
+    private PublishingHouseOutDTO publishingHouse;
+    private List <AuthorOutDTO> authors;
 }

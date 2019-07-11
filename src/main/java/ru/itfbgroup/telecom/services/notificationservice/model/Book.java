@@ -33,8 +33,8 @@ public class Book extends IDIdentity {
     @ManyToOne(fetch = FetchType.LAZY)
     private PublishingHouse publishingHouse;
 
-    @Column (name = "PUB_ID", insertable = false, updatable = false)
-    private long publishingHouse_ID;
+    @Column (name = "PUB_ID", insertable = false, updatable = false, nullable = false, length = 64)
+    private long publishingHouseId;
 
     @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     private BookBinary bookBinary;
