@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class AuthorOutDTO {
 
-    private long Id;
+    private Long Id;
     private String fullName;
 }

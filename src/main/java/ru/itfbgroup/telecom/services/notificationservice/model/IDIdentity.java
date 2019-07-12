@@ -1,12 +1,13 @@
 package ru.itfbgroup.telecom.services.notificationservice.model;
 
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
+import lombok.Data;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+@Data
 @MappedSuperclass
 public class IDIdentity {
 

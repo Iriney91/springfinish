@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class PublishingHouseOutDTO {
 
-    private long Id;
+    private Long Id;
     private String name;
     private String INN;
     private String address;

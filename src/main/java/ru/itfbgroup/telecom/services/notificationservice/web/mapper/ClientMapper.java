@@ -5,7 +5,7 @@ import ru.itfbgroup.telecom.services.notificationservice.model.Client;
 import ru.itfbgroup.telecom.services.notificationservice.web.dto.ClientInDTO;
 import ru.itfbgroup.telecom.services.notificationservice.web.dto.ClientOutDTO;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface ClientMapper {
 
     Client dtoToClient (ClientInDTO clientDTO);

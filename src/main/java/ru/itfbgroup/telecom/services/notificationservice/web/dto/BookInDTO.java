@@ -10,6 +10,6 @@ public class BookInDTO {
     private String name;
     private String iccid;
     private Integer year;
-    private List <Long> authors;
+    private List <Long> authorIds;
     private Long publishingHouseId;
 }
