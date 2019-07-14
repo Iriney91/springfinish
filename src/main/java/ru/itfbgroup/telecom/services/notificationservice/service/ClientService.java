@@ -1,6 +1,5 @@
 package ru.itfbgroup.telecom.services.notificationservice.service;
 
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.itfbgroup.telecom.services.notificationservice.common.web.Result;
@@ -21,8 +20,8 @@ public class ClientService {
         return clientRepositore.findAllByFullNameLikeAndLogin(clientPaginalRequestDTO.getFullName(), clientPaginalRequestDTO.getLogin(), clientPaginalRequestDTO.getPageRequest());
     }
 
-    public Client getById(Long Id){
-        return clientRepositore.findById(Id).orElseThrow(IllegalAccessError::new);
+    public Client getById(Long id){
+        return clientRepositore.findById(id).orElseThrow(IllegalAccessError::new);
     }
 
     public void update(Client client) {

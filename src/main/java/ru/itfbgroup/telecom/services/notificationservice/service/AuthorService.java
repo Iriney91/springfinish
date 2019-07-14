@@ -10,14 +10,13 @@ import ru.itfbgroup.telecom.services.notificationservice.web.dto.AuthorPaginalRe
 import java.util.List;
 import java.util.Set;
 
-
 @Service
 @RequiredArgsConstructor
 public class AuthorService {
 
     private final AuthorRepository authorRepository;
 
-    public List<Author> getPaginatedBySearchRequest(AuthorPaginalRequestDTO authorPaginalRequestDTO){
+    public List<Author> getPaginatedBySearchRequest(AuthorPaginalRequestDTO authorPaginalRequestDTO) {
         return authorRepository.findAllByFullNameLike(authorPaginalRequestDTO.getFullName(), authorPaginalRequestDTO.getPageRequest());
     }
 
@@ -25,8 +24,8 @@ public class AuthorService {
         return authorRepository.findAllByIdIn(authorsIds);
     }
 
-    public Author getById(Long Id){
-        return authorRepository.findById(Id).orElseThrow(IllegalAccessError::new);
+    public Author getById(Long id) {
+        return authorRepository.findById(id).orElseThrow(IllegalAccessError::new);
     }
 
     public void update(Author author) {

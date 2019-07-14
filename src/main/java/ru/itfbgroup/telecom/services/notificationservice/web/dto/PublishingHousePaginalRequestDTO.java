@@ -10,5 +10,5 @@ import ru.itfbgroup.telecom.services.notificationservice.common.web.PaginalReque
 public class PublishingHousePaginalRequestDTO extends PaginalRequest {
 
     private String name;
-    private String INN;
+    private String inn;
 }

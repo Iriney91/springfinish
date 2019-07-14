@@ -18,7 +18,7 @@ public class PublishingHouse extends IDIdentity{
     private String name;
 
     @Column(nullable = false, length = 10)
-    private String INN;
+    private String inn;
 
     @Column(nullable = false)
     private String address;

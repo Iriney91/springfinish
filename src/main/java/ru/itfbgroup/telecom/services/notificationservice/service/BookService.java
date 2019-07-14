@@ -23,8 +23,8 @@ public class BookService {
                 bookPaginalRequestDTO.getPublishingHouseId(), bookPaginalRequestDTO.getAuthorId(), bookPaginalRequestDTO.getPageRequest());
     }
 
-    public Book getById(Long Id) {
-        return bookRepository.findById(Id).orElseThrow(IllegalAccessError::new);
+    public Book getById(Long id) {
+        return bookRepository.findById(id).orElseThrow(IllegalAccessError::new);
     }
 
     public void update(Book book) {

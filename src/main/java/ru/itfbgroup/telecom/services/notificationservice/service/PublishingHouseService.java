@@ -18,12 +18,12 @@ public class PublishingHouseService {
     private final PublishingHouseRepository publishingHouseRepository;
 
     public List<PublishingHouse> getPaginatedBySearchRequest(PublishingHousePaginalRequestDTO publishingHousePaginalRequestDTO) {
-        return publishingHouseRepository.findAllByNameLikeAndINN(publishingHousePaginalRequestDTO.getName(), publishingHousePaginalRequestDTO.getINN(),
+        return publishingHouseRepository.findAllByNameLikeAndInn(publishingHousePaginalRequestDTO.getName(), publishingHousePaginalRequestDTO.getInn(),
                 publishingHousePaginalRequestDTO.getPageRequest());
     }
 
-    public PublishingHouse getById(Long Id) {
-        return publishingHouseRepository.findById(Id).orElseThrow(IllegalAccessError::new);
+    public PublishingHouse getById(Long id) {
+        return publishingHouseRepository.findById(id).orElseThrow(IllegalAccessError::new);
     }
 
     public void update(PublishingHouse publishingHouse) {

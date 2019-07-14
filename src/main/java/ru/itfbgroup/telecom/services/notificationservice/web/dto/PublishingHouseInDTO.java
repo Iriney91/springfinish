@@ -6,6 +6,6 @@ import lombok.Data;
 public class PublishingHouseInDTO {
 
     private String name;
-    private String INN;
+    private String inn;
     private String address;
 }
