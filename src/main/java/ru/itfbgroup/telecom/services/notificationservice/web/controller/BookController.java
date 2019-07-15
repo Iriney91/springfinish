@@ -26,7 +26,7 @@ public class BookController {
     private final BookMapper bookMapper;
 
 
-    @GetMapping(value = "/get/", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     PaginalResult<List<BookOutDTO>> getBooks(BookPaginalRequestDTO requestDto) {
         Page<Book> paginatedBySearchRequest = bookService.getPaginatedBySearchRequest(requestDto);
         List<BookOutDTO> bookOutDTOS = bookMapper.bookToDto(paginatedBySearchRequest.getContent());
@@ -45,13 +45,13 @@ public class BookController {
         return Result.success(bookMapper.bookToDto(bookService.update(book)));
     }
 
-    @PostMapping(value = "/post/")
+    @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     Result create(@RequestBody BookInDTO bookInDTO, List <Long> authorIds) {
         bookService.create(bookMapper.dtoToBook(bookInDTO), authorIds);
         return Result.success();
     }
 
-    @DeleteMapping(value = "/delete/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @DeleteMapping(value = "/{id}")
     Result delete(@PathVariable Long id) {
         bookService.delete(id);
         return Result.success();
