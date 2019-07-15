@@ -6,7 +6,7 @@ import java.util.List;
 @Data
 public class BookOutDTO {
 
-    private Long Id;
+    private Long id;
     private Long createDate;
     private String name;
     private String iccid;

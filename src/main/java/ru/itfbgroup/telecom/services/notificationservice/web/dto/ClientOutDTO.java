@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class ClientOutDTO {
 
-    private Long Id;
+    private Long id;
     private String fullName;
     private String login;
 }

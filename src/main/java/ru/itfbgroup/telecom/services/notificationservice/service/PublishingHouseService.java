@@ -2,6 +2,7 @@ package ru.itfbgroup.telecom.services.notificationservice.service;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import ru.itfbgroup.telecom.services.notificationservice.common.web.Result;
 import ru.itfbgroup.telecom.services.notificationservice.model.PublishingHouse;
@@ -17,28 +18,28 @@ public class PublishingHouseService {
 
     private final PublishingHouseRepository publishingHouseRepository;
 
-    public List<PublishingHouse> getPaginatedBySearchRequest(PublishingHousePaginalRequestDTO publishingHousePaginalRequestDTO) {
-        return publishingHouseRepository.findAllByNameLikeAndINN(publishingHousePaginalRequestDTO.getName(), publishingHousePaginalRequestDTO.getINN(),
+    public Page<PublishingHouse> getPaginatedBySearchRequest(PublishingHousePaginalRequestDTO publishingHousePaginalRequestDTO) {
+        return publishingHouseRepository.findAllByNameLikeAndINN(publishingHousePaginalRequestDTO.getName(), publishingHousePaginalRequestDTO.getInn(),
                 publishingHousePaginalRequestDTO.getPageRequest());
     }
 
-    public PublishingHouse getById(Long Id) {
-        return publishingHouseRepository.findById(Id).orElseThrow(IllegalAccessError::new);
+    public PublishingHouse getById(Long id) {
+        return publishingHouseRepository.findById(id).orElseThrow(IllegalAccessError::new);
     }
 
     public void update(PublishingHouse publishingHouse) {
         if (publishingHouseRepository.existsById(publishingHouse.getId())) {
             publishingHouseRepository.save(publishingHouse);
         } else {
-            Result.error(1, "Is not exist", new IllegalArgumentException());
+            throw new IllegalArgumentException("No such author found");
         }
     }
 
-    public void delete(PublishingHouse publishingHouse) {
-        if (publishingHouseRepository.existsById(publishingHouse.getId())) {
-            publishingHouseRepository.delete(publishingHouse);
+    public void delete(Long id) {
+        if (publishingHouseRepository.existsById(id)) {
+            publishingHouseRepository.deleteById(id);
         } else {
-            Result.error(1, "Is not exist", new IllegalArgumentException());
+            throw new IllegalArgumentException("No such author found");
         }
     }
 
@@ -46,7 +47,7 @@ public class PublishingHouseService {
         if (!publishingHouseRepository.existsById(publishingHouse.getId())) {
             publishingHouseRepository.save(publishingHouse);
         } else {
-            Result.error(2, "Already exist", new IllegalArgumentException());
+            throw new IllegalArgumentException("Already exist");
         }
         return publishingHouse;
     }

@@ -39,6 +39,10 @@ public class Book extends IDIdentity {
     @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     private BookBinary bookBinary;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "books")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "Authors_Books",
+            joinColumns = @JoinColumn(name = "Book_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "Author_ID", referencedColumnName = "ID")
+    )
     private Set <Author> authors = new HashSet<>();
 }

@@ -17,10 +17,6 @@ public class Author extends IDIdentity{
     @Column(nullable = false)
     private String fullName;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "Authors_Books",
-            joinColumns = @JoinColumn(name = "Author_ID", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "Book_ID", referencedColumnName = "ID")
-    )
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "authors")
     private Set <Book> books = new HashSet<>();
 }
