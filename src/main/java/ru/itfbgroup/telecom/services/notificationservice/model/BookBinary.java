@@ -17,7 +17,7 @@ public class BookBinary extends IDIdentity{
     private byte [] binaryContent;
 
     @Column(length = 64)
-    private String mineType;
+    private String mimeType;
 
     @Column
     private  String fileName;

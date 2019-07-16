@@ -12,5 +12,5 @@ import java.util.List;
 @Repository
 public interface PublishingHouseRepository extends JpaRepository <PublishingHouse, Long>{
 
-    Page<PublishingHouse> findAllByNameLikeAndINN(String name, String INN, Pageable pageable);
+    Page<PublishingHouse> findAllByNameLikeAndInn(String name, String inn, Pageable pageable);
 }

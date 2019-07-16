@@ -11,7 +11,7 @@ import java.util.Set;
 @Entity
 @EqualsAndHashCode(callSuper = true, exclude = "books")
 @SequenceGenerator(name = "MY_SEQ", sequenceName = "publishingHouse_SEQ")
-@Table(indexes = {@Index(name = "publishingHouse_INN_idx", columnList = "INN", unique = true)})
+@Table(indexes = {@Index(name = "publishingHouse_inn_idx", columnList = "inn", unique = true)})
 public class PublishingHouse extends IDIdentity{
 
     @Column(nullable = false)

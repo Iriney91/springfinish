@@ -31,15 +31,13 @@ public class BookSpecification implements Specification<Book> {
         }
         if (bookPaginalRequestDTO.getIccid()!=null){
             predicates.add(builder.like(builder.lower(root.get("iccid")),
-                    "%" + bookPaginalRequestDTO.getName().toLowerCase() + "%"));
+                    "%" + bookPaginalRequestDTO.getIccid().toLowerCase() + "%"));
         }
         if (bookPaginalRequestDTO.getPublishingHouseId() != null){
-            predicates.add(builder.like(builder.lower(root.get("publishingHouseId")),
-                    "%" + bookPaginalRequestDTO.getName().toLowerCase() + "%"));
+            predicates.add(builder.equal(root.get("publishingHouseId"), bookPaginalRequestDTO.getPublishingHouseId()));
         }
         if (bookPaginalRequestDTO.getAuthorId() != null){
-            predicates.add(builder.like(builder.lower(root.get("authorId")),
-                    "%" + bookPaginalRequestDTO.getName().toLowerCase() + "%"));
+            predicates.add(builder.equal(root.get("authorId"), bookPaginalRequestDTO.getAuthorId()));
         }
         return builder.and(predicates.toArray(new Predicate[predicates.size()]));
     }

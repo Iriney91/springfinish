@@ -19,7 +19,7 @@ public class PublishingHouseService {
     private final PublishingHouseRepository publishingHouseRepository;
 
     public Page<PublishingHouse> getPaginatedBySearchRequest(PublishingHousePaginalRequestDTO publishingHousePaginalRequestDTO) {
-        return publishingHouseRepository.findAllByNameLikeAndINN(publishingHousePaginalRequestDTO.getName(), publishingHousePaginalRequestDTO.getInn(),
+        return publishingHouseRepository.findAllByNameLikeAndInn(publishingHousePaginalRequestDTO.getName(), publishingHousePaginalRequestDTO.getInn(),
                 publishingHousePaginalRequestDTO.getPageRequest());
     }
 

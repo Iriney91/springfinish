@@ -23,21 +23,22 @@ public class BookService {
     public Page<Book> getPaginatedBySpecification(BookSpecification bookSpecification) {
         return bookRepository.findAll(
                 bookSpecification,
-               bookSpecification.getBookPaginalRequestDTO().getPageRequest());
+                bookSpecification.getBookPaginalRequestDTO().getPageRequest());
     }
 
     public Book getById(Long id) {
         return bookRepository.findById(id).orElseThrow(IllegalAccessError::new);
     }
 
-    public Book update(Book book, List <Long> authorIds) {
+    public Book update(Book book, List<Long> authorIds) {
         if (bookRepository.existsById(book.getId())) {
             book.setAuthors(authorService.findAllByIdIn(authorIds));
             book.setPublishingHouse(publishingHouseService.getById(book.getPublishingHouseId()));
             bookRepository.save(book);
         } else {
             throw new IllegalArgumentException("No such author found");
-        }return book;
+        }
+        return book;
     }
 
     public void delete(Long id) {
@@ -49,23 +50,19 @@ public class BookService {
     }
 
     public Book create(Book book, List<Long> authorIds) {
-        if (!bookRepository.existsById(book.getId())) {
             book.setAuthors(authorService.findAllByIdIn(authorIds));
             book.setPublishingHouse(publishingHouseService.getById(book.getPublishingHouseId()));
             bookRepository.save(book);
-        } else {
-            throw new IllegalArgumentException("Already exist");
-        }
         return book;
     }
 
-    public BookBinary getBookBinareById(Long id){
+    public BookBinary getBookBinareById(Long id) {
         Book book = bookRepository.findById(id).get();
         BookBinary bookBinary = book.getBookBinary();
-        return  bookBinary;
+        return bookBinary;
     }
 
-    public BookBinary create (Long id){
+    public BookBinary createBookBinary(Long id) {
         Book book = bookRepository.findById(id).get();
         BookBinary bookBinary = new BookBinary();
         book.setBookBinary(bookBinary);
