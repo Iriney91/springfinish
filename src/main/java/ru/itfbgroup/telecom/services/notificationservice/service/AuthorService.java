@@ -1,8 +1,8 @@
 package ru.itfbgroup.telecom.services.notificationservice.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-import ru.itfbgroup.telecom.services.notificationservice.common.web.Result;
 import ru.itfbgroup.telecom.services.notificationservice.model.Author;
 import ru.itfbgroup.telecom.services.notificationservice.repository.AuthorRepository;
 import ru.itfbgroup.telecom.services.notificationservice.web.dto.AuthorPaginalRequestDTO;
@@ -16,7 +16,13 @@ public class AuthorService {
 
     private final AuthorRepository authorRepository;
 
-    public List<Author> getPaginatedBySearchRequest(AuthorPaginalRequestDTO authorPaginalRequestDTO) {
+    public Page<Author> getPaginatedBySearchRequest(AuthorPaginalRequestDTO authorPaginalRequestDTO) {
+        if (authorPaginalRequestDTO.getSortColumn() == null)
+            authorPaginalRequestDTO.setSortColumn("fullName");
+        if (authorPaginalRequestDTO.getFullName() == null)
+
+            return authorRepository.findAll(authorPaginalRequestDTO.getPageRequest());
+
         return authorRepository.findAllByFullNameLike(authorPaginalRequestDTO.getFullName(), authorPaginalRequestDTO.getPageRequest());
     }
 
@@ -28,28 +34,24 @@ public class AuthorService {
         return authorRepository.findById(id).orElseThrow(IllegalAccessError::new);
     }
 
-    public void update(Author author) {
+    public Author update(Author author) {
         if (authorRepository.existsById(author.getId())) {
             authorRepository.save(author);
         } else {
-            Result.error(1, "Is not exist", new IllegalArgumentException());
+            throw new IllegalArgumentException("No such author found");
         }
+        return author;
     }
 
-    public void delete(Author author) {
-        if (authorRepository.existsById(author.getId())) {
-            authorRepository.delete(author);
+    public void delete(Long id) {
+        if (authorRepository.existsById(id)) {
+            authorRepository.deleteById(id);
         } else {
-            Result.error(1, "Is not exist", new IllegalArgumentException());
+            throw new IllegalArgumentException("No such author found");
         }
     }
 
     public Author create(Author author) {
-        if (!authorRepository.existsById(author.getId())) {
-            authorRepository.save(author);
-        } else {
-            Result.error(2, "Already exist", new IllegalArgumentException());
-        }
-        return author;
+            return authorRepository.save(author);
     }
 }

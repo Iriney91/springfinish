@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-@EqualsAndHashCode(callSuper = true, exclude = {"publishingHouse", "bookBinary", "authorIds"})
+@EqualsAndHashCode(callSuper = true, exclude = {"publishingHouse", "binaryContent", "authorIds"})
 @Entity
 @SequenceGenerator(name = "MY_SEQ", sequenceName = "book_SEQ")
 @Table(indexes = {@Index(name = "book_iccid_idx", columnList = "iccid", unique = true), @Index(name = "book_name_idx", columnList = "name", unique = false)})
@@ -39,6 +39,10 @@ public class Book extends IDIdentity {
     @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     private BookBinary bookBinary;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "books")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "Authors_Books",
+            joinColumns = @JoinColumn(name = "Book_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "Author_ID", referencedColumnName = "ID")
+    )
     private Set <Author> authors = new HashSet<>();
 }

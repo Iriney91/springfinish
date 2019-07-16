@@ -1,5 +1,6 @@
 package ru.itfbgroup.telecom.services.notificationservice.repository;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -11,5 +12,5 @@ import java.util.List;
 @Repository
 public interface PublishingHouseRepository extends JpaRepository <PublishingHouse, Long>{
 
-    List <PublishingHouse> findAllByNameLikeAndInn(String name, String inn, Pageable pageable);
+    Page<PublishingHouse> findAllByNameLikeAndINN(String name, String INN, Pageable pageable);
 }

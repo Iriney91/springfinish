@@ -14,7 +14,7 @@ import javax.persistence.SequenceGenerator;
 public class BookBinary extends IDIdentity{
 
     @Column
-    private byte [] bookBinary;
+    private byte [] binaryContent;
 
     @Column(length = 64)
     private String mineType;

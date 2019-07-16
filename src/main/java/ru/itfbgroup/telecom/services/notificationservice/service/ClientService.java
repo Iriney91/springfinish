@@ -1,6 +1,7 @@
 package ru.itfbgroup.telecom.services.notificationservice.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import ru.itfbgroup.telecom.services.notificationservice.common.web.Result;
 import ru.itfbgroup.telecom.services.notificationservice.model.Client;
@@ -16,7 +17,7 @@ public class ClientService {
 
     private final ClientRepositore clientRepositore;
 
-    public List<Client> getPaginatedBySearchRequest(ClientPaginalRequestDTO clientPaginalRequestDTO){
+    public Page<Client> getPaginatedBySearchRequest(ClientPaginalRequestDTO clientPaginalRequestDTO){
         return clientRepositore.findAllByFullNameLikeAndLogin(clientPaginalRequestDTO.getFullName(), clientPaginalRequestDTO.getLogin(), clientPaginalRequestDTO.getPageRequest());
     }
 
@@ -28,15 +29,15 @@ public class ClientService {
         if (clientRepositore.existsById(client.getId())) {
             clientRepositore.save(client);
         } else {
-            Result.error(1, "Is not exist", new IllegalArgumentException());
+            throw new IllegalArgumentException("No such author found");
         }
     }
 
-    public void delete(Client client) {
-        if (clientRepositore.existsById(client.getId())) {
-            clientRepositore.delete(client);
+    public void delete(Long id) {
+        if (clientRepositore.existsById(id)) {
+            clientRepositore.deleteById(id);
         } else {
-            Result.error(1, "Is not exist", new IllegalArgumentException());
+            throw new IllegalArgumentException("No such author found");
         }
     }
 
@@ -44,7 +45,7 @@ public class ClientService {
         if (!clientRepositore.existsById(client.getId())) {
             clientRepositore.save(client);
         } else {
-            Result.error(2, "Already exist", new IllegalArgumentException());
+            throw new IllegalArgumentException("Already exist");
         }
         return client;
     }

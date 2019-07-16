@@ -6,6 +6,8 @@ import ru.itfbgroup.telecom.services.notificationservice.model.Book;
 import ru.itfbgroup.telecom.services.notificationservice.web.dto.BookInDTO;
 import ru.itfbgroup.telecom.services.notificationservice.web.dto.BookOutDTO;
 
+import java.util.List;
+
 @Mapper(
         componentModel = "spring",
         uses = {
@@ -16,4 +18,6 @@ public interface BookMapper {
     Book dtoToBook (BookInDTO bookDTO);
     BookOutDTO bookToDto (Book book);
 
+    List<Book> dtoToBook(List<BookInDTO> bookInDTO);
+    List<BookOutDTO> bookToDto(List<Book> book);
 }

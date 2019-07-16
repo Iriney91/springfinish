@@ -1,6 +1,7 @@
 package ru.itfbgroup.telecom.services.notificationservice.repository;
 
 import lombok.Data;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -12,5 +13,5 @@ import java.util.List;
 @Repository
 public interface ClientRepositore extends JpaRepository <Client, Long>{
 
-    List<Client> findAllByFullNameLikeAndLogin (String fullName, String login, Pageable pageable);
+    Page<Client> findAllByFullNameLikeAndLogin (String fullName, String login, Pageable pageable);
 }
