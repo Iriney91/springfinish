@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-@EqualsAndHashCode(callSuper = true, exclude = {"publishingHouse", "bookBinary", "authorIds"})
+@EqualsAndHashCode(callSuper = true, exclude = {"publishingHouse", "binaryContent", "authorIds"})
 @Entity
 @SequenceGenerator(name = "MY_SEQ", sequenceName = "book_SEQ")
 @Table(indexes = {@Index(name = "book_iccid_idx", columnList = "iccid", unique = true), @Index(name = "book_name_idx", columnList = "name", unique = false)})
