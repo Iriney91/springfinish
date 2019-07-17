@@ -2,6 +2,7 @@ package ru.itfbgroup.telecom.services.notificationservice.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 
@@ -20,4 +21,7 @@ public class Client extends IDIdentity{
 
     @Column(nullable = false)
     private String password;
+
+    @Column(updatable = false)
+    private String userRole;
 }
