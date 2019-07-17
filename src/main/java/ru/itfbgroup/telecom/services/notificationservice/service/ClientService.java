@@ -25,7 +25,7 @@ public class ClientService {
 
             return clientRepository.findAll(clientPaginalRequestDTO.getPageRequest());
 
-        return clientRepository.findClientByLogin(clientPaginalRequestDTO.getLogin(), clientPaginalRequestDTO.getPageRequest());
+        return clientRepository.findAllBySearchParams(clientPaginalRequestDTO.getFullName(), clientPaginalRequestDTO.getLogin(), clientPaginalRequestDTO.getPageRequest());
     }
 
     public Client getById(Long id) {
@@ -53,16 +53,18 @@ public class ClientService {
         return clientRepository.save(client);
     }
 
-    public Client create (String login, String password, String name, String role) {
-        Client client = null;
+    public void create(String login, String password, String name, String role) {
+        PasswordEncoder encoder = context.getBean(PasswordEncoder.class);
+
+        CharSequence pass = encoder.encode(password);
+
         if (!clientRepository.existsByLogin(login)) {
-            client = new Client();
+            Client client = new Client();
             client.setLogin(login);
             client.setFullName(name);
-            client.setPassword(context.getBean(PasswordEncoder.class).encode(password));
+            client.setPassword(pass.toString());
             client.setUserRole(role);
             clientRepository.save(client);
-
-        }return client;
+        }
     }
 }

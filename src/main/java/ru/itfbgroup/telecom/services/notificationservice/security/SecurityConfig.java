@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.savedrequest.NullRequestCache;
 import org.springframework.session.MapSessionRepository;
 import org.springframework.session.web.http.HttpSessionIdResolver;
 
@@ -30,11 +31,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return xAuthToken();
     }
 
-    @Autowired
-    public void registerGlobalAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(myUserDetailsService)
-                .passwordEncoder(getPasswordEncoder());
+    @Override
+    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(myUserDetailsService);
     }
 
     @Override
@@ -48,7 +47,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 )
                 .permitAll()
                 .anyRequest()
-                .authenticated();
+                .authenticated().and().httpBasic().and().sessionManagement().maximumSessions(10).and().and()
+                .requestCache().requestCache(new NullRequestCache()).and()
+                .headers()
+                .contentTypeOptions().and()
+                .xssProtection().and()
+                .cacheControl()
+                .and()
+                .httpStrictTransportSecurity()
+                .and()
+                .frameOptions();
     }
 
     @Bean
