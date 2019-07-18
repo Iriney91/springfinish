@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -39,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.csrf().disable().authorizeRequests()
                 .antMatchers(
                         "/v2/api-docs",
                         "/auth/ok",
@@ -48,16 +47,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 )
                 .permitAll()
                 .anyRequest()
-                .authenticated().and().httpBasic().and().sessionManagement().maximumSessions(10).and().and()
-                .requestCache().requestCache(new NullRequestCache()).and()
-                .headers()
-                .contentTypeOptions().and()
-                .xssProtection().and()
-                .cacheControl()
+                .authenticated()
                 .and()
-                .httpStrictTransportSecurity()
-                .and()
-                .frameOptions();
+                .httpBasic()
+        ;
     }
 
     @Bean

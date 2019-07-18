@@ -21,7 +21,7 @@ public interface ClientRepository extends JpaRepository <Client, Long>, JpaSpeci
             + " or c.login = :login)")
     Page<Client> findAllBySearchParams(@Param("fullName") String fullName, @Param("login") String login, Pageable pageable);
 
-    Optional<Client> findByFullName(String full_name);
+    Optional<Client> findByFullName(String fullName);
 
     Optional<Client> findByLogin(String login);
 

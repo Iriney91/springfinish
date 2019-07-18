@@ -29,7 +29,7 @@ public class ClientDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return client.getFullName();
+        return client.getLogin();
     }
 
     @Override

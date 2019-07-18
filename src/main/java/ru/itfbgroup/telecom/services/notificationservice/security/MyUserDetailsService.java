@@ -18,7 +18,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        Client customer = repository.findByLogin(login).orElseThrow(() -> new EntityNotFoundException("No such user found"));
-        return new ClientDetails(customer);
+        Client client = repository.findByLogin(login).orElseThrow(() -> new EntityNotFoundException("No such user found"));
+        return new ClientDetails(client);
     }
 }
