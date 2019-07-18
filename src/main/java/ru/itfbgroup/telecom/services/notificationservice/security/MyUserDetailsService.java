@@ -1,9 +1,6 @@
 package ru.itfbgroup.telecom.services.notificationservice.security;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,8 +9,6 @@ import ru.itfbgroup.telecom.services.notificationservice.model.Client;
 import ru.itfbgroup.telecom.services.notificationservice.repository.ClientRepository;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.HashSet;
-import java.util.Set;
 
 @RequiredArgsConstructor
 @Service

@@ -3,7 +3,6 @@ package ru.itfbgroup.telecom.services.notificationservice.security;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
 import ru.itfbgroup.telecom.services.notificationservice.model.Client;
 
 import java.util.Collection;
@@ -20,18 +19,17 @@ public class ClientDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-
         return Collections.<GrantedAuthority>singletonList(new SimpleGrantedAuthority(client.getUserRole()));
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return client.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return client.getFullName();
     }
 
     @Override
