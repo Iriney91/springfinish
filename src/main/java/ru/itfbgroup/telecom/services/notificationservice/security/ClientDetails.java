@@ -1,5 +1,6 @@
 package ru.itfbgroup.telecom.services.notificationservice.security;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,7 +9,7 @@ import ru.itfbgroup.telecom.services.notificationservice.model.Client;
 import java.util.Collection;
 import java.util.Collections;
 
-
+@Slf4j
 public class ClientDetails implements UserDetails {
 
     private Client client;
@@ -34,21 +35,21 @@ public class ClientDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

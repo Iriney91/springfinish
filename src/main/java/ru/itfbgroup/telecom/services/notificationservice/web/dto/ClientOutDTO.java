@@ -8,4 +8,5 @@ public class ClientOutDTO {
     private Long id;
     private String fullName;
     private String login;
+    private String userRole;
 }

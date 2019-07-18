@@ -1,6 +1,7 @@
 package ru.itfbgroup.telecom.services.notificationservice.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,6 +13,7 @@ import ru.itfbgroup.telecom.services.notificationservice.web.dto.ClientPaginalRe
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ClientService {
 
     private final ApplicationContext context;
@@ -50,21 +52,27 @@ public class ClientService {
     }
 
     public Client create(Client client) {
-        return clientRepository.save(client);
+        if (client == null) return null;
+        return create(client.getLogin(),client.getPassword(), client.getFullName(),client.getUserRole());
     }
 
-    public void create(String login, String password, String name, String role) {
+    public Client create(String login, String password, String name, String role) {
         PasswordEncoder encoder = context.getBean(PasswordEncoder.class);
 
         CharSequence pass = encoder.encode(password);
-
+        Client client = null;
         if (!clientRepository.existsByLogin(login)) {
-            Client client = new Client();
+            client = new Client();
             client.setLogin(login);
             client.setFullName(name);
             client.setPassword(pass.toString());
             client.setUserRole(role);
             clientRepository.save(client);
+            log.info("Customer saved");
+            log.info(String.format("Customer password is: %s", client.getPassword()));
+        } else {
+            log.info(String.format("Customer with %s login already exist", login));
         }
+        return  client;
     }
 }

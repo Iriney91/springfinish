@@ -1,4 +1,4 @@
-package ru.itfbgroup.telecom.services.notificationservice.config;
+package ru.itfbgroup.telecom.services.notificationservice;
 
 
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,7 @@ public class SwaggerConfig {
 
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.itfbgroup.notificationspringservice")).paths(PathSelectors.any()).build()
+                .apis(RequestHandlerSelectors.basePackage("ru.itfbgroup.telecom.services.notificationservice")).paths(PathSelectors.any()).build()
                 .apiInfo(ApiInfo.DEFAULT);
     }
 }
