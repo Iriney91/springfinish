@@ -19,9 +19,12 @@ public class Client extends IDIdentity{
     @Column(nullable = false)
     private String login;
 
-    @Column(nullable = false)
+    @Column
     private String password;
 
     @Column(updatable = false)
     private String userRole;
+
+    @Column
+    private Boolean isConfirmed;
 }

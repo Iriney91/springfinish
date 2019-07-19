@@ -48,13 +48,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()//вот это добавил
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers(
                         "/v2/api-docs",
                         "/auth/ok",
                         "/swagger-resources/**",
-                        "/swagger-ui.html"
+                        "/swagger-ui.html",
+                        "/createClient"
                 )
                 .permitAll()
                 .anyRequest()

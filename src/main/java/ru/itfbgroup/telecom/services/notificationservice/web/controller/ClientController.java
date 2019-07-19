@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import ru.itfbgroup.telecom.services.notificationservice.common.web.PaginalResult;
 import ru.itfbgroup.telecom.services.notificationservice.common.web.Result;
 import ru.itfbgroup.telecom.services.notificationservice.model.Client;
+import ru.itfbgroup.telecom.services.notificationservice.service.AdminService;
 import ru.itfbgroup.telecom.services.notificationservice.service.ClientService;
+import ru.itfbgroup.telecom.services.notificationservice.service.ClientServiceAuthorization;
 import ru.itfbgroup.telecom.services.notificationservice.web.dto.ClientInDTO;
+import ru.itfbgroup.telecom.services.notificationservice.web.dto.ClientInDTOAdmin;
 import ru.itfbgroup.telecom.services.notificationservice.web.dto.ClientOutDTO;
 import ru.itfbgroup.telecom.services.notificationservice.web.dto.ClientPaginalRequestDTO;
 import ru.itfbgroup.telecom.services.notificationservice.web.mapper.ClientMapper;
@@ -26,6 +29,10 @@ import java.util.List;
 public class ClientController {
 
     private final ClientService clientService;
+
+    private final ClientServiceAuthorization clientServiceAuthorization;
+
+    private final AdminService adminService;
 
     private final ClientMapper clientMapper;
 
@@ -53,6 +60,19 @@ public class ClientController {
     @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     Result <ClientOutDTO> create(@RequestBody ClientInDTO clientInDTO) {
         return Result.success(clientMapper.clientToDto(clientService.create(clientMapper.dtoToClient(clientInDTO))));
+    }
+
+    @PostMapping(value = "/createClient", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    Result create(@RequestBody ClientInDTOAdmin clientInDTOadmin) {
+        clientServiceAuthorization.create(clientMapper.dtoToClient(clientInDTOadmin));
+        return Result.success();
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PostMapping(value = "/authorization", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    Result clientAuthorization (@RequestBody String login) {
+        adminService.clientAuthorization(login);
+        return Result.success();
     }
 
     @DeleteMapping(value = "/{id}")
