@@ -9,5 +9,5 @@ public class ClientInDTO {
     private String login;
     private String password;
     private String userRole;
-    private Boolean isConfirmed = true;
+    private Boolean isConfirmed;
 }

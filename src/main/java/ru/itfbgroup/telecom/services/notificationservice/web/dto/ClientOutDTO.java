@@ -9,4 +9,5 @@ public class ClientOutDTO {
     private String fullName;
     private String login;
     private String userRole;
+    private Boolean isConfirmed;
 }

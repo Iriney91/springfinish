@@ -70,8 +70,8 @@ public class ClientController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping(value = "/authorization", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    Result clientAuthorization (@RequestBody String login) {
-        adminService.clientAuthorization(login);
+    Result clientAuthorization (@RequestBody Long id) {
+        adminService.clientAuthorization(id);
         return Result.success();
     }
 

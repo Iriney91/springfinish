@@ -8,5 +8,5 @@ public class ClientInDTOAdmin {
     private String fullName;
     private String login;
     private String userRole;
-    private Boolean isConfirmed = false;
+    private Boolean isConfirmed;
 }

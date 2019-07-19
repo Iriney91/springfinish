@@ -15,9 +15,9 @@ import java.util.Optional;
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long>, JpaSpecificationExecutor<Client> {
 
-    @Query("SELECT c FROM Client c WHERE (:fullName is null or c.fullName = :fullName) and (:login is null"
-            + " or c.login = :login)")
-    Page<Client> findAllBySearchParams(@Param("fullName") String fullName, @Param("login") String login, Pageable pageable);
+    @Query("SELECT c FROM Client c WHERE (:fullName is null or c.fullName = :fullName) and (:isConfirmed is null or c.isConfirmed = :isConfirmed) and (:login is null"
+            + " or c.login = :login)" )
+    Page<Client> findAllBySearchParams(@Param("fullName") String fullName, @Param("login") String login, @Param("isConfirmed") boolean isConfirmed, Pageable pageable);
 
     Optional<Client> findByFullName(String fullName);
 

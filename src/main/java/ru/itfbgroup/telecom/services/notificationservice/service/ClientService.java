@@ -25,9 +25,10 @@ public class ClientService {
             clientPaginalRequestDTO.setSortColumn("fullName");
         if (clientPaginalRequestDTO.getFullName() == null)
 
-            return clientRepository.findAll(clientPaginalRequestDTO.getPageRequest());
+                return clientRepository.findAll(clientPaginalRequestDTO.getPageRequest());
 
-        return clientRepository.findAllBySearchParams(clientPaginalRequestDTO.getFullName(), clientPaginalRequestDTO.getLogin(), clientPaginalRequestDTO.getPageRequest());
+        return clientRepository.findAllBySearchParams(clientPaginalRequestDTO.getFullName(), clientPaginalRequestDTO.getLogin(),
+                clientPaginalRequestDTO.getIsConfirmed(),clientPaginalRequestDTO.getPageRequest());
     }
 
     public Client getById(Long id) {
@@ -53,7 +54,7 @@ public class ClientService {
 
     public Client create(Client client) {
         if (client == null) return null;
-        return create(client.getLogin(),client.getPassword(), client.getFullName(),client.getUserRole());
+        return create(client.getLogin(), client.getPassword(), client.getFullName(), client.getUserRole());
     }
 
     public Client create(String login, String password, String name, String role) {
@@ -73,6 +74,6 @@ public class ClientService {
         } else {
             log.info(String.format("Customer with %s login already exist", login));
         }
-        return  client;
+        return client;
     }
 }
